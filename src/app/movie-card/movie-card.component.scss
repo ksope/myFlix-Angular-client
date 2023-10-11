@@ -1,0 +1,164 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@500&family=Poppins:wght@300;400;500;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@500&family=Poppins:wght@300;400;500;800&display=swap");
+
+$primary-color: #22254b;
+$secondary-color: #373b69;
+$purple-color: #7378c5;
+$whitesmoke-color: rgb(155, 141, 141);
+$white-color: #fff;
+$pink-color: #ff69b4;
+$red-color: #ff0000;
+$transition: all 400ms ease;
+
+* {
+  box-sizing: border-box;
+}
+
+.container {
+  display: flex;
+  background: linear-gradient(rgba(30, 27, 38, 0.95), rgba(30, 27, 38, 0.95)),
+    url("https://i.ibb.co/FDGqCmM/papers-co-ag74-interstellar-wide-space-film-movie-art-33-iphone6-wallpaper.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  margin: 0;
+  flex-direction: column;
+  font-family: "Poppins", sans-serif;
+}
+
+.movies-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: 6rem;
+}
+
+.movie-card {
+  width: 300px;
+  margin: 1rem;
+  border-radius: 6px;
+  box-shadow: 0 4px 5px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  position: relative;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  background-color: $secondary-color;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1rem 0 1rem;
+}
+
+.header button {
+  color: $white-color;
+  margin-left: 0.5rem;
+  align-self: flex-start;
+  font-size: 1.1rem;
+}
+
+.nav-btns {
+  display: flex;
+}
+
+.nav-btns button:hover {
+  color: $whitesmoke-color;
+}
+
+h1 {
+  color: $white-color;
+  align-self: center;
+}
+
+.mat-tooltip {
+  font-size: 0.05rem;
+  font-family: "Courier New", Courier, monospace;
+  text-transform: uppercase;
+}
+
+.search {
+  background-color: transparent;
+  border-radius: 50px;
+  color: $white-color;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  font-family: inherit;
+}
+
+.search::placeholder {
+  color: $purple-color;
+}
+
+.search:focus {
+  background-color: $primary-color;
+  outline: none;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.btn {
+  width: max-content;
+  display: inline-block;
+  color: $secondary-color;
+  border-radius: 0.3rem;
+  cursor: pointer;
+  border: 1px solid $secondary-color;
+  transition: var(--transition);
+  box-shadow: 0 4px 5px rgba(0, 0, 0, 0.2);
+}
+
+.btn:hover {
+  background: $white-color;
+  color: $primary-color;
+  border-color: transparent;
+}
+
+.btn-group {
+  display: flex;
+  justify-content: flex-start;
+  gap: 0.2rem;
+}
+
+.icon span {
+  margin-right: 0.25rem;
+}
+
+.icon span.pink {
+  background-color: $pink-color;
+}
+
+.movie-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.movie-title {
+  font-weight: bold;
+}
+
+.movie-director {
+  font-size: 0.9rem;
+  margin-bottom: 0.4rem;
+}
+
+.header-content span {
+  font-style: italic;
+  font-family: "Bebas Neue", sans-serif;
+}
+
+#my-title {
+  color: $white-color;
+}
+
+#flix-title {
+  color: $red-color;
+}
