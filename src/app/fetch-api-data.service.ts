@@ -26,6 +26,9 @@ export class UserRegistrationService {
   }
 
   public userLogin(userDetails: any): Observable<any> {
+    console.log(userDetails);
+    console.log(apiUrl + 'login?' + new URLSearchParams(userDetails));
+
     return this.http
       .post(apiUrl + 'login?' + new URLSearchParams(userDetails), {})
       .pipe(catchError(this.handleError));
@@ -84,21 +87,16 @@ export class UserRegistrationService {
   }
 
   //Making the api call for the get one user endpoint using @param username
-  getUser(username: string): Observable<any> {
+  getUser(): Observable<any> {
     const user = JSON.parse(localStorage.getItem('user') || '{}');
-    return user;
-    // This endpoint does not exist but this is how it would look
-    // const username = localStorage.getItem('user');
-    // const token = localStorage.getItem('token');
-    // return this.http.get(apiUrl + 'users/' + user, {
-    //   headers: new HttpHeaders(
-    //     {
-    //       Authorization: 'Bearer ' + token,
-    //     })
-    // }).pipe(
-    //   map(this.extractResponseData),
-    //   catchError(this.handleError)
-    // );
+    const token = localStorage.getItem('token');
+    return this.http
+      .get(apiUrl + 'users/' + user.Username, {
+        headers: new HttpHeaders({
+          Authorization: 'Bearer ' + token,
+        }),
+      })
+      .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
   //Making the api call to get favourite movies for a user endpoint
@@ -121,6 +119,10 @@ export class UserRegistrationService {
   editUser(updatedUser: any): Observable<any> {
     const user = JSON.parse(localStorage.getItem('user') || '{}');
     const token = localStorage.getItem('token');
+
+    console.log(updatedUser);
+    console.log(apiUrl + 'users/' + user.Username, updatedUser);
+
     return this.http
       .put(apiUrl + 'users/' + user.Username, updatedUser, {
         headers: new HttpHeaders({
@@ -148,20 +150,18 @@ export class UserRegistrationService {
     const token = localStorage.getItem('token');
     const user = JSON.parse(localStorage.getItem('user') || '{}');
 
+    console.log(movieId);
+    console.log(apiUrl + `users/${user.Username}/movies/${movieId}`);
+
     user.FavoriteMovies.push(movieId);
     localStorage.setItem('user', JSON.stringify(user));
 
     return this.http
-      .put(
-        apiUrl + `users/${user.Username}/movies/${movieId}`,
-        {},
-        {
-          headers: new HttpHeaders({
-            'Content-Type': 'application/json',
-            Authorization: 'Bearer ' + token,
-          }),
-        }
-      )
+      .post(apiUrl + `users/${user.Username}/movies/${movieId}`, {
+        headers: new HttpHeaders({
+          Authorization: 'Bearer ' + token,
+        }),
+      })
       .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
@@ -190,7 +190,7 @@ export class UserRegistrationService {
   isFavoriteMovie(movieId: string): boolean {
     const user = JSON.parse(localStorage.getItem('user') || '{}');
     if (user) {
-      return user.FavoriteMovies.includes(movieId);
+      return user.FavoriteMovies && user.FavoriteMovies.includes(movieId);
     }
 
     return false;
