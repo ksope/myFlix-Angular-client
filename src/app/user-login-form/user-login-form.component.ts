@@ -10,6 +10,8 @@ import { UserRegistrationService } from '../fetch-api-data.service';
 // This import is used to display notifications back to the user
 import { MatSnackBar } from '@angular/material/snack-bar';
 
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-user-login-form',
   templateUrl: './user-login-form.component.html',
@@ -21,7 +23,8 @@ export class UserLoginFormComponent {
   constructor(
     public fetchApiData: UserRegistrationService,
     public dialogRef: MatDialogRef<UserLoginFormComponent>,
-    public snackBar: MatSnackBar
+    public snackBar: MatSnackBar,
+    private router: Router
   ) {}
 
   ngOnInit(): void {}
@@ -30,14 +33,16 @@ export class UserLoginFormComponent {
   loginUser(): void {
     this.fetchApiData.userLogin(this.userData).subscribe(
       (data) => {
+        console.log(data);
         localStorage.setItem('user', JSON.stringify(data.user));
         localStorage.setItem('token', data.token);
         localStorage.setItem('Username', data.user.Username);
         // Logic for a successful login
         this.dialogRef.close(); // This will close the modal on success!
-        this.snackBar.open(data, 'OK', {
+        this.snackBar.open('User Login successful', 'OK', {
           duration: 2000,
         });
+        this.router.navigate(['movies'])
       },
       (data) => {
         this.snackBar.open(data, 'OK', {
