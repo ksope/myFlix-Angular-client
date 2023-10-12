@@ -1,12 +1,11 @@
 // src/app/movie-card/movie-card.component.ts
 import { Component, OnInit, Input } from '@angular/core';
-import { UserRegistrationService } from '../fetch-api-data.service'
+import { UserRegistrationService } from '../fetch-api-data.service';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { MovieGenreComponent } from '../movie-genre/movie-genre.component';
 import { MovieDirectorComponent } from '../movie-director/movie-director.component';
 import { MovieDetailsComponent } from '../movie-details/movie-details.component';
-
 
 @Component({
   selector: 'app-movie-card',
@@ -118,10 +117,13 @@ export class MovieCardComponent {
             console.log(
               'Movie deleted from favourites successfully.',
               response
-            ); alert("movie deleted successfully from favourite's list")
+            );
+            alert("movie deleted successfully from favourite's list");
           },
-          error: (error) =>
-            {console.error('Error deleting movie from favourites:', error); alert('There is an error')},
+          error: (error) => {
+            console.error('Error deleting movie from favourites:', error);
+            alert('There is an error');
+          },
         });
       }
     } else {
@@ -134,7 +136,10 @@ export class MovieCardComponent {
   addMovieToFavourite(movie: any): void {
     if (!this.isFavourite(movie._id)) {
       this.fetchApiData.addFavoriteMovie(movie._id).subscribe({
-        next: (response) => {console.log(response); alert("Movie added successfully to Favourite's list")},
+        next: (response) => {
+          console.log(response);
+          alert("Movie added successfully to Favourite's list");
+        },
         error: (error) => console.log(error),
       });
     } else {
@@ -151,6 +156,3 @@ export class MovieCardComponent {
     }
   }
 }
-
-
- 
