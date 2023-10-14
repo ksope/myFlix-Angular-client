@@ -62,3 +62,15 @@ h1, h2, p {
   flex-direction: column;
 
 }
+
+#movie-list-item{
+  color: $white-color;
+  margin-left: 2rem;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.image-container{
+  background-color: $bg-color-dark;
+  width: 25rem;
+  margin-left: 1rem;
+}
