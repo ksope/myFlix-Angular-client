@@ -2,6 +2,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { UserRegistrationService } from '../fetch-api-data.service';
 import { Router } from '@angular/router';
+
 import { MatDialog } from '@angular/material/dialog';
 import { MovieGenreComponent } from '../movie-genre/movie-genre.component';
 import { MovieDirectorComponent } from '../movie-director/movie-director.component';
@@ -28,6 +29,17 @@ export class MovieCardComponent {
   }
   checkIfFavClicked: boolean = false;
   iconType: string = 'favorite_border';
+  searchTerm: string = '';
+
+  searchMovie(): void {
+    if (this.searchTerm != '') {
+      this.movies = this.movies.filter((movie) =>
+        movie.Title.toLowerCase().match(this.searchTerm.toLowerCase())
+      );
+    } else if (this.searchTerm == '') {
+      this.ngOnInit();
+    }
+  }
 
   //confirm if movie is already in user's favourite list
   checkIfMovieIsFavourite(movie: any): boolean {

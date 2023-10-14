@@ -1,10 +1,32 @@
 <div class="container">
   <header class="header">
-    <div class="header-content" ><h1><span id="my-title">my</span><span id="flix-title">Flix</span> Movie App</h1>
-    <form id="form">
-      <input type="text" placeholder="Search" id="search" class="search" aria-label="search" />
-    </form></div>
-    <div class="nav-btns"><button mat-button aria-label="user profile button" (click)="toProfilePage()">Profile</button><button mat-button aria-label="logout button" (click)="logout()">Logout</button></div>
+    <div class="header-content">
+      <h1>
+        <span id="my-title">my</span><span id="flix-title">Flix</span> Movie App
+      </h1>
+      <div id="form">
+        <input
+          type="text"
+          placeholder="Search"
+          id="search"
+          class="search"
+          aria-label="search"
+          [(ngModel)]="searchTerm"
+          (input)="searchMovie()"
+        />
+      </div>
+    </div>
+    <div class="nav-btns">
+      <button
+        mat-button
+        aria-label="user profile button"
+        (click)="toProfilePage()"
+      >
+        Profile</button
+      ><button mat-button aria-label="logout button" (click)="logout()">
+        Logout
+      </button>
+    </div>
   </header>
   <div class="movies-container">
     <mat-card *ngFor="let movie of movies" class="movie-card">
@@ -20,12 +42,43 @@
         class="movie-img"
       />
       <mat-card-actions class="actions">
-        <div class="btn-group"><button mat-raised-button class="btn" (click)= "getMovieGenre(movie.Genre)" aria-label="View Genre information">Genre</button>
-        <button  mat-raised-button class="btn" (click)= "getMovieDirector(movie.Director)" aria-label="View Director Information">Director</button>
-        <button mat-raised-button class="btn" (click)= "getMovieDescription(movie.Description)" aria-label="View Synopsis">Synopsis</button></div>
-        <button mat-icon-button aria-label="Add movie to favourites" (click)= "toggleFavouriteMovies(movie)" [ngStyle]="{color: isFavourite(movie._id) ? '#ff69b4' : '#000'}" matTooltip="Click to add/remove from favourite list"
+        <div class="btn-group">
+          <button
+            mat-raised-button
+            class="btn"
+            (click)="getMovieGenre(movie.Genre)"
+            aria-label="View Genre information"
+          >
+            Genre
+          </button>
+          <button
+            mat-raised-button
+            class="btn"
+            (click)="getMovieDirector(movie.Director)"
+            aria-label="View Director Information"
+          >
+            Director
+          </button>
+          <button
+            mat-raised-button
+            class="btn"
+            (click)="getMovieDescription(movie.Description)"
+            aria-label="View Synopsis"
+          >
+            Synopsis
+          </button>
+        </div>
+        <button
+          mat-icon-button
+          aria-label="Add movie to favourites"
+          (click)="toggleFavouriteMovies(movie)"
+          [ngStyle]="{ color: isFavourite(movie._id) ? '#ff69b4' : '#000' }"
+          matTooltip="Click to add/remove from favourite list"
           matTooltipPosition="below"
-          ><mat-icon *ngIf="isFavourite(movie._id)">favorite</mat-icon><mat-icon *ngIf="!isFavourite(movie._id)">favorite_border</mat-icon></button>
+        >
+          <mat-icon *ngIf="isFavourite(movie._id)">favorite</mat-icon
+          ><mat-icon *ngIf="!isFavourite(movie._id)">favorite_border</mat-icon>
+        </button>
       </mat-card-actions>
     </mat-card>
   </div>
