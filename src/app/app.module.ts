@@ -38,10 +38,21 @@ const appRoutes: Routes = [
 ];
 
 @NgModule({
-  declarations: [AppComponent, UserRegistrationFormComponent, MovieCardComponent, WelcomePageComponent, UserLoginFormComponent, MovieGenreComponent, MovieDirectorComponent, MovieDetailsComponent, ProfileComponent],
+  declarations: [
+    AppComponent,
+    UserRegistrationFormComponent,
+    MovieCardComponent,
+    WelcomePageComponent,
+    UserLoginFormComponent,
+    MovieGenreComponent,
+    MovieDirectorComponent,
+    MovieDetailsComponent,
+    ProfileComponent,
+  ],
   imports: [
     BrowserModule,
     HttpClientModule,
+    FormsModule,
     AppRoutingModule,
     MatGridListModule,
     BrowserAnimationsModule,
@@ -55,7 +66,6 @@ const appRoutes: Routes = [
     MatFormFieldModule,
     MatDialogModule,
     MatSnackBarModule,
-    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent],
