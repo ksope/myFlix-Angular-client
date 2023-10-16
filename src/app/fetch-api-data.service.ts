@@ -17,6 +17,12 @@ export class UserRegistrationService {
   // Inject the HttpClient module to the constructor params
   // This will provide HttpClient to the entire class, making it available via this.http
   constructor(private http: HttpClient) {}
+  /**
+   * Making the api call for the user registration endpoint
+   * @param userDetails
+   * @returns a user that has been registered in the DB
+   * used in user-registration-form component
+   */
   // Making the api call for the user registration endpoint
   public userRegistration(userDetails: any): Observable<any> {
     console.log(userDetails);
@@ -25,6 +31,12 @@ export class UserRegistrationService {
       .pipe(catchError(this.handleError));
   }
 
+  /**
+   * direct users to the login page
+   * @param userDetails
+   * @returns will login the user with a token and username, password and token in the local storage
+   * used in user-login-form component
+   */
   public userLogin(userDetails: any): Observable<any> {
     console.log(userDetails);
     console.log(apiUrl + 'login?' + new URLSearchParams(userDetails));
@@ -34,8 +46,10 @@ export class UserRegistrationService {
       .pipe(catchError(this.handleError));
   }
 
-  //Making the api call for the get all movies endpoint returning an array of movies
-
+  /**
+   * @returns all of the movies
+   * used in the movie-card component
+   */
   getAllMovies(): Observable<any> {
     const token = localStorage.getItem('token');
     return this.http
@@ -47,8 +61,10 @@ export class UserRegistrationService {
       .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
-  //Making the api call for the get one movie endpoint using @param title
-
+  /**
+   * @param title
+   * @returns a movie's card details for the user
+   */
   getMovie(title: string): Observable<any> {
     const token = localStorage.getItem('token');
     return this.http
@@ -60,8 +76,12 @@ export class UserRegistrationService {
       .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
-  //Making the api call for the get one director endpoint using @param directorName
-
+  /**
+   *
+   * @param directorName
+   * @returns the director by name, bio, birthday
+   * used in the movie-card component
+   */
   getDirector(directorName: string): Observable<any> {
     const token = localStorage.getItem('token');
     return this.http
@@ -73,8 +93,12 @@ export class UserRegistrationService {
       .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
-  //Making the api call for the get one genre endpoint using @param genreName
-
+  /**
+   *
+   * @param genreName
+   * @returns the genre by name and description
+   * used in the movie-card component
+   */
   getGenre(genreName: string): Observable<any> {
     const token = localStorage.getItem('token');
     return this.http
@@ -86,7 +110,11 @@ export class UserRegistrationService {
       .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
-  //Making the api call for the get one user endpoint using @param username
+  /**
+   * get one of the users
+   * @param username
+   * @returns the user on the user-profile component
+   */
   getUser(): Observable<any> {
     const user = JSON.parse(localStorage.getItem('user') || '{}');
     const token = localStorage.getItem('token');
@@ -99,7 +127,11 @@ export class UserRegistrationService {
       .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
-  //Making the api call to get favourite movies for a user endpoint
+  /**
+   * have the list of favorite movies displayed on their profile page
+   * @param username
+   * @returns the user's array of favorite movies
+   */
   getFavoriteMovies(username: string): Observable<any> {
     const token = localStorage.getItem('token');
     return this.http
@@ -115,7 +147,13 @@ export class UserRegistrationService {
       );
   }
 
-  //Making the api call for the edit user endpoint
+  /**
+   * edit the user's profile and update information
+   * @param username
+   * @param updatedUser
+   * @returns takes the data the user wants to change in the profile component and updates it in the localstorage and the DB
+   * used in the profile component
+   */
   editUser(updatedUser: any): Observable<any> {
     const user = JSON.parse(localStorage.getItem('user') || '{}');
     const token = localStorage.getItem('token');
@@ -132,7 +170,12 @@ export class UserRegistrationService {
       .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
-  //Making the api call for the delete user endpoint
+  /**
+   * delete the users account
+   * obtains the user from localstorage
+   * @returns a deleted user from the DB
+   * used in the profile component
+   */
   deleteUser(): Observable<any> {
     const user = JSON.parse(localStorage.getItem('user') || '{}');
     const token = localStorage.getItem('token');
@@ -145,7 +188,13 @@ export class UserRegistrationService {
       .pipe(catchError(this.handleError));
   }
 
-  //Making the api call for the add a movie to favourite Movies endpoint
+  /**
+   * add a movie the the user's list of favourite mvies
+   * obtains user from localstorage
+   * @param movieId
+   * @returns a movie added to the users favorite movies array
+   * used in the movie-card component
+   */
   addFavoriteMovie(movieId: string): Observable<any> {
     const token = localStorage.getItem('token');
     const user = JSON.parse(localStorage.getItem('user') || '{}');
@@ -165,7 +214,11 @@ export class UserRegistrationService {
       .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
-  //Making the api call for the elete a movie from the favorite movies endpoint
+  /**
+   * @param movieId
+   * @returns deletes the movie from the users favorite movies list
+   * used in the movie-card component and the profile component
+   */
   deleteFavoriteMovie(movieId: string): Observable<any> {
     const token = localStorage.getItem('token');
     const user = JSON.parse(localStorage.getItem('user') || '{}');
@@ -185,8 +238,11 @@ export class UserRegistrationService {
       .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
-  //returns boolean value if user has movie in their FavoriteMovies list
-
+  /**
+   * @param movieId
+   * @returns a boolean value that will check if the favorite movies list has the param of movieID
+   * used in the movie-card component
+   */
   isFavoriteMovie(movieId: string): boolean {
     const user = JSON.parse(localStorage.getItem('user') || '{}');
     if (user) {

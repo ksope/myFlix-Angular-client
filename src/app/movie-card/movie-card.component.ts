@@ -56,6 +56,10 @@ export class MovieCardComponent {
     }
   }
 
+  /** change the icon to reflect which toggle function of
+   * adding and deleting movie from user's favourite list
+   * was triggered
+   * */
   changeFavIcon() {
     this.checkIfFavClicked = !this.checkIfFavClicked;
     if (this.checkIfFavClicked) {
@@ -65,6 +69,9 @@ export class MovieCardComponent {
     }
   }
 
+  /**
+   * @returns all movies
+   */
   getMovies(): void {
     this.fetchApiData.getAllMovies().subscribe((resp: any) => {
       this.movies = resp;
@@ -73,7 +80,11 @@ export class MovieCardComponent {
     });
   }
 
-  //get details of movie genre
+  /**
+   *
+   * @param genreName
+   * param data will be passed into the dialog when opened
+   */
   getMovieGenre(genre: any): void {
     console.log(genre);
 
@@ -85,7 +96,11 @@ export class MovieCardComponent {
     });
   }
 
-  //get details of movie director
+  /**
+   *
+   * @param directorName
+   * param data will be passed into the dialog when opened
+   */
   getMovieDirector(director: any): void {
     console.log(director);
     this.dialog.open(MovieDirectorComponent, {
@@ -96,7 +111,11 @@ export class MovieCardComponent {
     });
   }
 
-  //get details of Synopsis of movie
+  /**
+   *
+   * @param description
+   * param data will be passed into the dialog when opened
+   */
   getMovieDescription(details: string): void {
     console.log(details);
     this.dialog.open(MovieDetailsComponent, {
@@ -115,12 +134,20 @@ export class MovieCardComponent {
     this.router.navigate(['profile']);
   }
 
+  /**
+   *
+   * log user out of session and delete user
+   * data from localstorage
+   */
   logout(): void {
     this.router.navigate(['welcome']);
     localStorage.clear();
   }
 
-  //function to remove movies from user's favourite list
+  /**
+   * @param movieId
+   * will deletes the movie from the user's favorite movies list
+   */
   deleteMovieFromFavourite(movie: any): void {
     if (this.isFavourite(movie._id)) {
       if (confirm("Delete movie from favourite's list?")) {
@@ -144,7 +171,10 @@ export class MovieCardComponent {
     }
   }
 
-  //function to add movies to user's favourite list
+  /**
+   * @param movieId
+   * will set the selected movie as one of the user's favorites
+   */
   addMovieToFavourite(movie: any): void {
     if (!this.isFavourite(movie._id)) {
       this.fetchApiData.addFavoriteMovie(movie._id).subscribe({
@@ -160,6 +190,10 @@ export class MovieCardComponent {
     }
   }
 
+  /**
+   * @param movieId
+   * toggle, that is add movie to favourite list if not, if already same button will delete the movie from the user's favourite list
+   */
   toggleFavouriteMovies(movie: any): void {
     if (this.isFavourite(movie._id)) {
       this.deleteMovieFromFavourite(movie);

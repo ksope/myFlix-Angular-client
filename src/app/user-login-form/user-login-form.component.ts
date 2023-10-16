@@ -29,7 +29,10 @@ export class UserLoginFormComponent {
 
   ngOnInit(): void {}
 
-  // on login token, userData will be stored in localStorage
+  /**
+   * on login token, userdata, and UserName will be stored in localstorage.
+   * user will be sent to the movie page
+   */
   loginUser(): void {
     this.fetchApiData.userLogin(this.userData).subscribe(
       (data) => {
@@ -42,7 +45,7 @@ export class UserLoginFormComponent {
         this.snackBar.open('User Login successful', 'OK', {
           duration: 2000,
         });
-        this.router.navigate(['movies'])
+        this.router.navigate(['movies']);
       },
       (data) => {
         this.snackBar.open(data, 'OK', {

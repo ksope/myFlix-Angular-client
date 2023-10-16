@@ -33,6 +33,9 @@ export class ProfileComponent {
     this.getUser();
   }
 
+  /**
+   *@returns the user's username, email, nirthday and favourrite list of movies
+   */
   getUser(): void {
     this.fetchApiData.getUser().subscribe((resp: any) => {
       this.user = resp;
@@ -54,7 +57,9 @@ export class ProfileComponent {
     });
   }
 
-  // this will edit the user information
+  /**
+   * updates the user's information on form submission
+   */
   editUser(): void {
     this.fetchApiData.editUser(this.userData).subscribe(
       (data: any) => {
@@ -74,7 +79,9 @@ export class ProfileComponent {
     );
   }
 
-  // deleting user account and return to the welcome screen
+  /**
+   * deletes the user's account and navigates the user back to the login/sign up page
+   */
   deleteUser(): void {
     if (confirm('Delete account permanently?')) {
       this.router.navigate(['welcome']).then(() => {
@@ -88,7 +95,7 @@ export class ProfileComponent {
     }
   }
 
-  //navigate to movies page
+  //navigate user to movies page
   toMainPage(): void {
     this.router.navigate(['movies']);
   }
